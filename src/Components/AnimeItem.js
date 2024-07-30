@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 function AnimeItem() {
     const {id} = useParams()
@@ -98,5 +99,116 @@ function AnimeItem() {
         </AnimeItemStyled >
     )
 }
+
+const AnimeItemStyled = styled.div`
+    padding: 3rem 18rem;
+    background-color: #EDEDED;
+    h1{
+        display: inline-block;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        background:linear-gradient( to right, #A855F7, #27AE60);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: all .4s ease-in-out;
+        &:hover{
+            transform: skew(-3deg);
+        }
+    }
+    .title{
+        display: inline-block;
+        margin: 3rem 0;
+        font-size: 2rem;
+        cursor: pointer;
+        background:linear-gradient( to right, #A855F7 23%, #27AE60);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .description{
+        margin-top: 2rem;
+        color: #6c7983;
+        line-height: 1.7rem;
+        button{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #27AE60;
+            font-weight: 600;
+        }
+    }
+
+    .trailer-con{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        iframe{
+            outline: none;
+            border: 5px solid #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: #FFFFFF;
+        }
+    }
+
+    .details{
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        border: 5px solid #e5e7eb;
+        .detail{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            img{
+                border-radius: 7px;
+            }
+        }
+        .anime-details{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            p{
+                display: flex;
+                gap: 1rem;
+            }
+            p span:first-child{
+                font-weight: 600;
+                color: #454e56;
+            }
+        }
+    }
+
+    .characters{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 2rem;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 5px solid #e5e7eb;
+        .character{
+            padding: .4rem .6rem;
+            border-radius: 7px;
+            background-color: #EDEDED;
+            transition: all .4s ease-in-out;
+            img{
+                width: 100%;
+            }
+            h4{
+                padding: .5rem 0;
+                color: #454e56;
+            }
+            p{
+                color: #27AE60;
+            }
+            &:hover{
+                transform: translateY(-5px);
+            }
+        }
+    }
+`;
 
 export default AnimeItem
