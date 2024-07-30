@@ -1,9 +1,11 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import { useGlobalContext } from '../context/global'
 import Popular from './Popular'
 import styled from 'styled-components'
 import Upcoming from './Upcoming'
 import Airing from './Airing'
+import logo from '../assets/the-anime-logo.svg'
 
 function Homepage() {
 
@@ -35,7 +37,10 @@ function Homepage() {
         <HomepageStyled>
             <header>
                 <div className="logo">
-                    <h1>
+                    <Link to = "/" className='navbar-brand fw-3 fs-22 flex align-center'>
+                        <img src={logo} alt="Logo" height="100" width="100" />
+                    </Link>
+                    <h1 className = "logo-title">
                         {rendered === 'popular' ? 'Popular Anime' : 
                         rendered === 'airing' ? 'Airing Anime' : 'Upcoming Anime'}
                     </h1>
@@ -86,6 +91,9 @@ const HomepageStyled = styled.div`
             align-items: center;
             justify-content: center;
             margin-bottom: 2rem;
+        }
+        .logo-title {
+            margin-left: 20px;
         }
         .search-container{
             display: flex;
