@@ -2,6 +2,8 @@ import React, {createContext, useContext, useReducer} from "react";
 
 const GlobalContext = createContext();
 
+const baseUrl = "https://api.jikan.moe/v4";
+
 //actions
 const LOADING = "LOADING";
 const SEARCH = "SEARCH";
@@ -53,6 +55,60 @@ export const GlobalContextProvider = ({children}) => {
         if(e.target.value === ''){
             state.isSearch = false;
         }
+    }
+
+
+    //handle submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(search){
+            searchAnime(search);
+            state.isSearch = true;
+        }else{
+            state.isSearch = false;
+            alert('Please enter a search term')
+        }
+    }
+
+    //fetch popular anime
+    const getPopularAnime = async () => {
+        dispatch({type: LOADING})
+        const response = await fetch(`${baseUrl}/top/anime?filter=bypopularity`);
+        const data = await response.json();
+        dispatch({type: GET_POPULAR_ANIME, payload: data.data})
+    }
+
+    //fetch upcoming anime
+    const getUpcomingAnime = async () => {
+        dispatch({type: LOADING})
+        const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`);
+        const data = await response.json();
+        dispatch({type: GET_UPCOMING_ANIME, payload: data.data})
+    }
+
+
+    //fetch airing anime
+    const getAiringAnime = async () => {
+        dispatch({type: LOADING})
+        const response = await fetch(`${baseUrl}/top/anime?filter=airing`);
+        const data = await response.json();
+        dispatch({type: GET_AIRING_ANIME, payload: data.data})
+    }
+
+    //search anime
+    const searchAnime = async (anime) => {
+        dispatch({type: LOADING})
+        const response = await fetch(`https://api.jikan.moe/v4/anime?q=${anime}&order_by=popularity&sort=asc&sfw`);
+        const data = await response.json();
+        dispatch({type: SEARCH, payload: data.data})
+    }
+
+    //get anime pictures
+    const getAnimePictures = async (id) => {
+        dispatch({type: LOADING})
+        const response = await fetch(`https://api.jikan.moe/v4/characters/${id}/pictures`);
+        const data = await response.json();
+        dispatch({type: GET_PICTURES, payload: data.data})
     }
 
     //initial render
